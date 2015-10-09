@@ -56,7 +56,7 @@ canPutRookInLine line pos = (Vec.foldr (step pos)
                                        (Vec.zip (Vec.generate 3 (+1))  line)
                             ) `elem` [Ok, Put]
 
-data FoldState = MayPut | CannotPut | Put | Ok | Invalid deriving (Show, Eq)
+data FoldState = MayPut | CannotPut | Put | Ok | Invalid deriving (Eq)
 
 step :: Int -> (Int, Piece) -> FoldState -> FoldState
 step pos (i, Pawn) MayPut = if pos == i then Invalid else MayPut
