@@ -1,0 +1,43 @@
+name:                Attack-Rooks
+
+version:             0.1.0.0
+
+synopsis:            N-rooks problem with blocking pawns
+
+license:             MIT
+
+license-file:        LICENSE
+
+author:              diorge
+
+maintainer:          diorge.nla@hotmail.com
+
+category:            Math
+
+build-type:          Simple
+
+-- Extra files to be distributed with the package, such as examples or a 
+-- README.
+-- extra-source-files:  
+
+cabal-version:       >=1.10
+
+
+executable Attack-Rooks
+  main-is:             Main.hs
+  
+  -- Modules included in this executable, other than Main.
+  -- other-modules:       
+  
+  -- LANGUAGE extensions used by modules in this package.
+  -- other-extensions:    
+  
+  -- Other library packages from which modules are imported.
+  build-depends:       base >=4.6 && <4.7
+  
+  -- Directories containing source files.
+  hs-source-dirs:      src 
+  
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  
