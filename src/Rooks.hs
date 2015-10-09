@@ -15,7 +15,12 @@ data Piece = Pawn
 type Board = Matrix Piece
 
 highestRooks :: Board -> Int
-highestRooks = undefined
+highestRooks b = rookCount b + highestRooks' b
+
+highestRooks' :: Board -> Int
+highestRooks' = (+1) . vecmax . Vec.map highestRooks' . derivedStates
+    where vecmax v | Vec.null v = (-1)
+                   | otherwise  = Vec.maximum v
 
 rookCount :: Board -> Int
 rookCount = Vec.length . Vec.filter (== Rook) . getMatrixAsVector
