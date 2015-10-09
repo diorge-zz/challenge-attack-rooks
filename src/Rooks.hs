@@ -17,8 +17,19 @@ type Board = Matrix Piece
 highestRooks :: Board -> Int
 highestRooks = undefined
 
-canPutRook :: Int -> Int -> Board -> Bool
-canPutRook row col b = canPutRookInLine (getCol col b) row
+derivedStates :: Board -> Vec.Vector Board
+derivedStates b = Vec.map (placeRook b) . Vec.filter (canPutRook b) $ positions b
+
+positions :: Board -> Vec.Vector (Int, Int)
+positions b = Vec.map (\(x,y) -> (x+1, y+1)) $ Vec.generate (n*n)
+                (\i -> (i `mod` n, i `div` n))
+                where n = nrows b
+
+placeRook :: Board -> (Int, Int) -> Board
+placeRook b p = setElem Rook p b
+
+canPutRook :: Board -> (Int, Int) -> Bool
+canPutRook b (row, col) = canPutRookInLine (getCol col b) row
                        && canPutRookInLine (getRow row b) col
 
 canPutRookInLine :: Vec.Vector Piece -> Int -> Bool
