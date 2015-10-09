@@ -1,3 +1,9 @@
+{-|
+Module: Rooks
+Description: solution for the Attack Rooks problem
+
+Provides a solution for the Attack Rooks problem (N-Pawn/Rook problem).
+-}
 module Rooks
     ( Piece(..)
     , Board
@@ -7,15 +13,19 @@ module Rooks
 import Data.Matrix
 import qualified Data.Vector as Vec
 
-data Piece = Pawn
-           | Rook
-           | Empty
+-- | Define a Piece on the board
+data Piece = Pawn -- ^ A blocking Pawn
+           | Rook -- ^ A placed Rook
+           | Empty -- ^ An empty slot
             deriving (Show, Eq)
 
+-- | Defines a Board (synonym to Matrix Piece)
 type Board = Matrix Piece
 
+-- | Solves the problem for a given board
 highestRooks :: Board -> Int
 highestRooks b = rookCount b + highestRooks' b
+
 
 highestRooks' :: Board -> Int
 highestRooks' = (+1) . vecmax . Vec.map highestRooks' . derivedStates
