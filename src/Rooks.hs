@@ -17,6 +17,9 @@ type Board = Matrix Piece
 highestRooks :: Board -> Int
 highestRooks = undefined
 
+rookCount :: Board -> Int
+rookCount = Vec.length . Vec.filter (== Rook) . getMatrixAsVector
+
 derivedStates :: Board -> Vec.Vector Board
 derivedStates b = Vec.map (placeRook b) . Vec.filter (canPutRook b) $ positions b
 
