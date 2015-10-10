@@ -8,6 +8,9 @@ import Data.List.Split (splitOn)
 main :: IO ()
 main = undefined
 
+valid :: Board -> Bool
+valid b = ncols b == nrows b
+
 parse :: String -> Maybe Board
 parse = fmap fromLists . parse'
 
