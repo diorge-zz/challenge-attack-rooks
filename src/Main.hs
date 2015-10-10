@@ -4,9 +4,27 @@ module Main
 import Rooks
 import Data.Matrix
 import Data.List.Split (splitOn)
+import System.Environment (getArgs)
+import Control.Monad (forM_)
 
 main :: IO ()
-main = undefined
+main = getArgs >>= flip forM_ process
+
+process :: String -> IO ()
+process = printResult . calculate
+
+printResult :: Maybe Int -> IO ()
+printResult Nothing  = putStrLn "Invalid input"
+printResult (Just r) = print r
+
+calculate :: String -> Maybe Int
+calculate = fmap highestRooks . validate valid . parse
+
+validate :: (a -> Bool) -> Maybe a -> Maybe a
+validate _ Nothing = Nothing
+validate f (Just x) = check (f x) x
+        where   check True  a = Just a
+                check False _ = Nothing
 
 valid :: Board -> Bool
 valid b = ncols b == nrows b
